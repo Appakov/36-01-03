@@ -40,3 +40,38 @@ const moveChildBlock = () => {
     }
 }
 moveChildBlock()
+
+const start = document.querySelector("#start")
+const stop = document.querySelector("#stop")
+const reset = document.querySelector("#reset")
+const seconds = document.querySelector('#seconds')
+
+let counter = 0;
+let intervalId;
+
+function render() {
+    start.addEventListener("click", startCounter)
+    stop.addEventListener("click", stopCounter);
+    reset.addEventListener("click", resetCounter);
+}
+render()
+
+function startCounter() {
+    if (!intervalId) {
+        intervalId = setInterval(function () {
+            counter++;
+            seconds.innerHTML = counter;
+        }, 500);
+    }
+}
+
+function stopCounter() {
+    clearInterval(intervalId);
+    intervalId = 0;
+}
+
+function resetCounter() {
+    counter = 0;
+    seconds.innerHTML = counter;
+    stopCounter();
+}
